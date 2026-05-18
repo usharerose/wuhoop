@@ -1,8 +1,9 @@
 """
 Schema definitions
 """
+
 from enum import StrEnum
-from typing import NamedTuple, TypedDict
+from typing import NamedTuple
 
 from pydantic import BaseModel
 
@@ -124,17 +125,13 @@ class ScoreboardData(BaseModel):
     """
     Content of stats.nba.com/stats/scoreboardv3 response
     """
+
     meta: Meta
     scoreboard: Scoreboard
 
 
 class LeagueId(StrEnum):
     NBA = "00"
-
-
-class ScoreboardQueryParams(TypedDict):
-    GameDate: str  # YYYY-MM-DD
-    LeagueID: LeagueId
 
 
 class ScoreboardGameBrief(NamedTuple):

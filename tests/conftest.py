@@ -6,7 +6,6 @@ import os
 
 import pytest
 
-
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 
 

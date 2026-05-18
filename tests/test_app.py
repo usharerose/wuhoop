@@ -2,8 +2,8 @@
 Tests for app functions
 """
 import datetime
+from collections.abc import Iterator
 from contextlib import contextmanager
-from typing import Iterator
 from unittest.mock import AsyncMock, Mock, patch
 
 import pytest
@@ -65,12 +65,11 @@ class TestQueryScoreboard:
         game_date: datetime.date,
         nba_league_id: str,
     ) -> None:
-        with patch_httpx_client("get", 500, b""):
-            with pytest.raises(ValueError):
-                await query_scoreboard(
-                    game_date=game_date,
-                    league_id=nba_league_id,
-                )
+        with patch_httpx_client("get", 500, b""), pytest.raises(ValueError):
+            await query_scoreboard(
+                game_date=game_date,
+                league_id=nba_league_id,
+            )
 
 
 class TestMain:

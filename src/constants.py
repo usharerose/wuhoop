@@ -1,6 +1,7 @@
 """
 Application-wide constants
 """
+
 BASE_URL: str = "https://stats.nba.com/stats/"
 ENDPOINT: str = "scoreboardv3"
 

@@ -1,6 +1,7 @@
 """
 Fetch Scoreboard statistics of National Basketball Association
 """
+
 import argparse
 import asyncio
 import datetime
@@ -9,7 +10,7 @@ from urllib.parse import urljoin
 import httpx
 
 from .constants import BASE_URL, ENDPOINT, HEADERS
-from .schemas import LeagueId, ScoreboardData, ScoreboardGameBrief, ScoreboardQueryParams
+from .schemas import LeagueId, ScoreboardData, ScoreboardGameBrief
 
 
 async def query_scoreboard(
@@ -26,14 +27,12 @@ async def query_scoreboard(
     :return: A dictionary containing the scoreboard statistics
     :rtype: dict[str, Any]
     """
-    params: ScoreboardQueryParams = {
+    params = {
         "GameDate": game_date.strftime("%Y-%m-%d"),
         "LeagueID": league_id,
     }
     async with httpx.AsyncClient(headers=HEADERS) as client:
-        response = await client.get(
-            urljoin(BASE_URL, ENDPOINT), params=params
-        )
+        response = await client.get(urljoin(BASE_URL, ENDPOINT), params=params)
         return ScoreboardData.model_validate_json(response.content.decode("utf-8"))
 
 
