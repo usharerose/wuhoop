@@ -14,7 +14,7 @@ from ..schemas import ScoreboardData as QueryScoreboardResult
 class ScoreboardData(BaseModel):
     game_id: str
     game_code: str
-    game_status_code: str
+    game_status_code: int
     game_time_utc: datetime.datetime
     period: int
 
@@ -50,7 +50,7 @@ async def get_scoreboards(
             ScoreboardData(
                 game_id=game.gameId,
                 game_code=game.gameCode,
-                game_status_code=game.gameStatusText,
+                game_status_code=game.gameStatus,
                 game_time_utc=datetime.datetime.strptime(game.gameTimeUTC, "%Y-%m-%dT%H:%M:%SZ"),
                 period=game.period,
                 away_team_id=game.awayTeam.teamId,
