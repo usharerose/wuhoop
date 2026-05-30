@@ -4,7 +4,7 @@ Tests for schema validation
 import pytest
 from pydantic import ValidationError
 
-from src.schemas import (
+from backend.schemas import (
     LeagueId,
     Meta,
     Period,
