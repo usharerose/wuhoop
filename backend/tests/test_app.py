@@ -8,8 +8,8 @@ from unittest.mock import AsyncMock, Mock, patch
 
 import pytest
 
-from src.app import main, query_scoreboard
-from src.schemas import ScoreboardData
+from backend.app import main, query_scoreboard
+from backend.schemas import ScoreboardData
 
 
 @contextmanager
@@ -84,7 +84,7 @@ class TestMain:
         async def mock_query(*args, **kwargs):
             return data
 
-        monkeypatch.setattr("src.app.query_scoreboard", mock_query)
+        monkeypatch.setattr("backend.app.query_scoreboard", mock_query)
         result = await main(game_date=game_date)
         assert isinstance(result, dict)
         assert "0042500206" in result
@@ -100,7 +100,7 @@ class TestMain:
         async def mock_query(*args, **kwargs):
             return data
 
-        monkeypatch.setattr("src.app.query_scoreboard", mock_query)
+        monkeypatch.setattr("backend.app.query_scoreboard", mock_query)
         result = await main(game_date=game_date)
         brief = result["0042500206"]
         assert brief.away_team_tricode == "DET"

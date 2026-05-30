@@ -7,6 +7,7 @@ requires-python = ">=3.14"
 dependencies = [
     "httpx>=0.28.1",
     "pydantic>=2.13.4",
+    "quart>=0.20.0",
 ]
 
 [tool.ruff]
@@ -17,20 +18,22 @@ line-length = 100
 select = ["E", "F", "I", "UP", "B", "SIM"]
 
 [tool.ruff.lint.isort]
-known-first-party = ["src"]
+known-first-party = ["backend"]
 
 [tool.mypy]
 python_version = "3.14"
 strict = true
-exclude = ["tests/"]
+exclude = ["backend/tests/"]
 explicit_package_bases = true
+mypy_path = "backend"
 
 [[tool.mypy.overrides]]
-module = "tests.*"
+module = "backend.tests.*"
 ignore_errors = true
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
+testpaths = ["backend/tests"]
 
 [dependency-groups]
 dev = [
