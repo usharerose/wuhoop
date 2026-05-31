@@ -7,8 +7,6 @@ RUN npm ci
 
 COPY . .
 
-ENV BACKEND_URL=http://backend:5000
-
 CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
 
 
