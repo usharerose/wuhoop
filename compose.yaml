@@ -1,0 +1,17 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "5000:5000"
+
+  frontend:
+    build:
+      context: ./frontend
+      target: dev
+    ports:
+      - "5173:5173"
+    environment:
+      - BACKEND_URL=http://backend:5000
+    depends_on:
+      - backend

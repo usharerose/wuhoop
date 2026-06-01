@@ -2,21 +2,19 @@
 Development server entry point
 """
 
-import asyncio
+import uvicorn
 
-from hypercorn.asyncio import serve
-from hypercorn.config import Config
-
-from .api.app import create_app
+from api.app import create_app
 
 
-async def main() -> None:
-    app = create_app()
-    config = Config()
-    config.bind = ["127.0.0.1:5000"]
-    config.accesslog = "-"
-    await serve(app, config)
+def main() -> None:
+    uvicorn.run(
+        create_app(),
+        host="127.0.0.1",
+        port=5000,
+        access_log=False,
+    )
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    main()
