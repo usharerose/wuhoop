@@ -24,17 +24,16 @@ known-first-party = ["backend"]
 [tool.mypy]
 python_version = "3.14"
 strict = true
-exclude = ["backend/tests/"]
+exclude = ["tests/"]
 explicit_package_bases = true
-mypy_path = "backend"
 
 [[tool.mypy.overrides]]
-module = "backend.tests.*"
+module = "tests.*"
 ignore_errors = true
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
-testpaths = ["backend/tests"]
+testpaths = ["tests"]
 
 [dependency-groups]
 dev = [

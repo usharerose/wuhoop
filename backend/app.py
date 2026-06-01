@@ -9,8 +9,8 @@ from urllib.parse import urljoin
 
 import httpx
 
-from .constants import BASE_URL, ENDPOINT, HEADERS
-from .schemas import LeagueId, ScoreboardData, ScoreboardGameBrief
+from constants import BASE_URL, ENDPOINT, HEADERS
+from schemas import LeagueId, ScoreboardData, ScoreboardGameBrief
 
 
 async def query_scoreboard(

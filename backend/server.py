@@ -4,7 +4,7 @@ Development server entry point
 
 import uvicorn
 
-from .api.app import create_app
+from api.app import create_app
 
 
 def main() -> None:

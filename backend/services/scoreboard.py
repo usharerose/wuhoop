@@ -6,9 +6,9 @@ import datetime
 
 from pydantic import BaseModel
 
-from ..app import query_scoreboard
-from ..schemas import LeagueId
-from ..schemas import ScoreboardData as QueryScoreboardResult
+from app import query_scoreboard
+from schemas import LeagueId
+from schemas import ScoreboardData as QueryScoreboardResult
 
 
 class ScoreboardData(BaseModel):
