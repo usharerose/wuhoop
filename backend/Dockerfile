@@ -11,4 +11,4 @@ COPY . .
 
 EXPOSE 5000
 
-CMD ["uv", "run", "uvicorn", "--factory", "api.app:create_app", "--host", "0.0.0.0", "--port", "5000"]
+CMD ["uv", "run", "uvicorn", "--factory", "wuhoop.api.app:create_app", "--host", "0.0.0.0", "--port", "5000"]

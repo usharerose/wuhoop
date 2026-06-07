@@ -1,6 +1,7 @@
 """
 Shared fixtures for tests
 """
+
 import datetime
 import os
 

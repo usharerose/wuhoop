@@ -9,6 +9,9 @@ dependencies = [
     "pydantic>=2.13.4",
     "quart>=0.20.0",
     "uvicorn>=0.38.0",
+    "sqlalchemy[asyncio]>=2.0.0",
+    "asyncpg>=0.30.0",
+    "alembic>=1.13.0",
 ]
 
 [tool.ruff]
@@ -19,12 +22,12 @@ line-length = 100
 select = ["E", "F", "I", "UP", "B", "SIM"]
 
 [tool.ruff.lint.isort]
-known-first-party = ["backend"]
+known-first-party = ["wuhoop"]
 
 [tool.mypy]
 python_version = "3.14"
 strict = true
-exclude = ["tests/"]
+exclude = ["tests/", "alembic/"]
 explicit_package_bases = true
 
 [[tool.mypy.overrides]]

@@ -1,9 +1,33 @@
 services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: wuhoop
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: wuhoop
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  migrations:
+    build:
+      context: ./backend
+    command: uv run alembic upgrade head
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://wuhoop:password@db:5432/wuhoop
+    depends_on:
+      - db
+
   backend:
     build:
       context: ./backend
     ports:
       - "5000:5000"
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://wuhoop:password@db:5432/wuhoop
+    depends_on:
+      - migrations
 
   frontend:
     build:
@@ -15,3 +39,6 @@ services:
       - BACKEND_URL=http://backend:5000
     depends_on:
       - backend
+
+volumes:
+  postgres_data:
