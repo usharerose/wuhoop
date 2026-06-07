@@ -1,6 +1,7 @@
 """
 Tests for app functions
 """
+
 import datetime
 from collections.abc import Iterator
 from contextlib import contextmanager
@@ -8,15 +9,13 @@ from unittest.mock import AsyncMock, Mock, patch
 
 import pytest
 
-from backend.app import main, query_scoreboard
-from backend.schemas import ScoreboardData
+from wuhoop.app import main, query_scoreboard
+from wuhoop.schemas import ScoreboardData
 
 
 @contextmanager
 def patch_httpx_client(
-    http_method: str,
-    status_code: int,
-    response_content: bytes
+    http_method: str, status_code: int, response_content: bytes
 ) -> Iterator[AsyncMock]:
     mock_response = Mock(
         content=response_content,
@@ -84,7 +83,7 @@ class TestMain:
         async def mock_query(*args, **kwargs):
             return data
 
-        monkeypatch.setattr("backend.app.query_scoreboard", mock_query)
+        monkeypatch.setattr("wuhoop.app.query_scoreboard", mock_query)
         result = await main(game_date=game_date)
         assert isinstance(result, dict)
         assert "0042500206" in result
@@ -100,7 +99,7 @@ class TestMain:
         async def mock_query(*args, **kwargs):
             return data
 
-        monkeypatch.setattr("backend.app.query_scoreboard", mock_query)
+        monkeypatch.setattr("wuhoop.app.query_scoreboard", mock_query)
         result = await main(game_date=game_date)
         brief = result["0042500206"]
         assert brief.away_team_tricode == "DET"

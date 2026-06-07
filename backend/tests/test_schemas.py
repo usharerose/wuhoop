@@ -1,10 +1,11 @@
 """
 Tests for schema validation
 """
+
 import pytest
 from pydantic import ValidationError
 
-from backend.schemas import (
+from wuhoop.schemas import (
     LeagueId,
     Meta,
     Period,
@@ -13,7 +14,6 @@ from backend.schemas import (
 
 
 class TestLeagueId:
-
     def test_nba_value(self) -> None:
         assert LeagueId.NBA == "00"
         assert str(LeagueId.NBA) == "00"
