@@ -2,6 +2,8 @@
 Application-wide constants
 """
 
+from enum import StrEnum
+
 BASE_URL: str = "https://stats.nba.com/stats/"
 ENDPOINT: str = "scoreboardv3"
 
@@ -20,3 +22,11 @@ HEADERS: dict[str, str] = {
     "x-nba-stats-origin": "stats",
     "x-nba-stats-token": "true",
 }
+
+
+class LeagueId(StrEnum):
+    """
+    League identifiers used by stats.nba.com endpoints.
+    """
+
+    NBA = "00"

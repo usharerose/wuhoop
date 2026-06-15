@@ -8,7 +8,8 @@ from http import HTTPStatus
 
 from quart import Blueprint, Response, request
 
-from ..services.scoreboard import get_scoreboards
+from wuhoop.services.scoreboard import get_scoreboards
+
 from .schemas import HealthResponse, ScoreboardData, ScoreboardsResponse
 
 bp = Blueprint("api_v1", __name__, url_prefix="/api/v1")

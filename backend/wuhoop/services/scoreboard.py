@@ -6,9 +6,9 @@ import datetime
 
 from pydantic import BaseModel
 
-from ..app import query_scoreboard
-from ..schemas import LeagueId
-from ..schemas import ScoreboardData as QueryScoreboardResult
+from wuhoop.constants import LeagueId
+from wuhoop.sources import query_scoreboard
+from wuhoop.sources.schemas import ScoreboardData as QueryScoreboardResult
 
 
 class ScoreboardData(BaseModel):
