@@ -45,23 +45,27 @@ class SourceClient:
         self,
         headers: Mapping[str, str] | None = None,
         timeout: float | None = None,
+        *,
+        transport: httpx.AsyncBaseTransport | None = None,
     ):
         self._headers = headers if headers is not None else self.HEADERS
         self._timeout = timeout if timeout is not None else self.TIMEOUT
+        self._transport = transport
 
     async def get_dict(
         self,
         endpoint_path: str,
         params: Mapping[str, Any],
     ) -> dict[str, Any]:
-        print(endpoint_path)
-        print(params)
-        async with httpx.AsyncClient(headers=self._headers, timeout=self._timeout) as client:
+        async with httpx.AsyncClient(
+            headers=self._headers,
+            timeout=self._timeout,
+            transport=self._transport,
+        ) as client:
             response = await client.get(
                 urljoin(self.BASE_URL, endpoint_path),
                 params=params,
             )
-        print(response.content.decode("utf-8"))
         data: dict[str, Any] = json.loads(response.content.decode("utf-8"))
         return data
 
