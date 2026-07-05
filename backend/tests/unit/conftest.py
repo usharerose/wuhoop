@@ -29,7 +29,9 @@ def get_source_data() -> Callable[[str], dict[str, Any]]:
     """
     def _get_source_data(file_path: str) -> dict[str, Any]:
         with open(file_path, "r", encoding="utf-8-sig") as f:
-            return json.load(f)
+            data = json.load(f)
+            assert isinstance(data, dict)
+            return data
     return _get_source_data
 
 

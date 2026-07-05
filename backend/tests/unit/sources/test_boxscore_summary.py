@@ -2,6 +2,9 @@
 Unit tests for wuhoop.sources.boxscore_summary.query_boxscore_summary.
 """
 
+from typing import Any, Callable
+
+from tests.unit.conftest import _SourceClientTransport
 from wuhoop.sources import query_boxscore_summary
 from wuhoop.sources.base import SourceClient
 from wuhoop.sources.schemas import BoxScoreSummaryData
@@ -11,8 +14,8 @@ class TestQueryBoxscoreSummary:
 
     async def test_returns_boxscore_summary_data(
         self,
-        source_client_transport_factory,
-        get_source_data,
+        source_client_transport_factory: Callable[..., _SourceClientTransport],
+        get_source_data: Callable[..., dict[str, Any]],
     ) -> None:
         transport = source_client_transport_factory(
             boxscoresummaryv3=get_source_data("tests/data/boxscore_summary.json")
@@ -41,8 +44,8 @@ class TestQueryBoxscoreSummary:
 
     async def test_request_params_use_game_id_alias(
         self,
-        source_client_transport_factory,
-        get_source_data,
+        source_client_transport_factory: Callable[..., _SourceClientTransport],
+        get_source_data: Callable[..., dict[str, Any]],
     ) -> None:
         transport = source_client_transport_factory(
             boxscoresummaryv3=get_source_data("tests/data/boxscore_summary.json")

@@ -7,9 +7,11 @@ transport so no HTTP or DB is touched.
 """
 
 import datetime
+from typing import Any, Callable
 
 import httpx
 
+from tests.unit.conftest import _SourceClientTransport
 from wuhoop.services.scoreboard import get_scoreboards
 from wuhoop.sources.base import SourceClient
 
@@ -19,8 +21,8 @@ class TestGetScoreboards:
     async def test_get_scoreboards(
         self,
         game_date: datetime.date,
-        source_client_transport_factory,
-        get_source_data,
+        source_client_transport_factory: Callable[..., _SourceClientTransport],
+        get_source_data: Callable[..., dict[str, Any]],
     ) -> None:
         transport = source_client_transport_factory(
             scoreboardv3=get_source_data("tests/data/scoreboard.json"),
@@ -44,7 +46,7 @@ class TestGetScoreboards:
         game_date: datetime.date,
     ) -> None:
 
-        def _error_handler(request: httpx.Request):
+        def _error_handler(request: httpx.Request) -> httpx.Response:
             raise httpx.HTTPStatusError(
                 "Server error",
                 request=request,

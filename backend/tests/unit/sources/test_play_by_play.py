@@ -2,6 +2,9 @@
 Unit tests for wuhoop.sources.play_by_play.query_play_by_play.
 """
 
+from typing import Any, Callable
+
+from tests.unit.conftest import _SourceClientTransport
 from wuhoop.sources import query_play_by_play
 from wuhoop.sources.base import SourceClient
 from wuhoop.sources.schemas import PlayByPlayData
@@ -11,8 +14,8 @@ class TestQueryPlayByPlay:
 
     async def test_returns_play_by_play_data(
         self,
-        source_client_transport_factory,
-        get_source_data,
+        source_client_transport_factory: Callable[..., _SourceClientTransport],
+        get_source_data: Callable[..., dict[str, Any]],
     ) -> None:
         transport = source_client_transport_factory(
             playbyplayv3=get_source_data("tests/data/play_by_play.json")
@@ -46,8 +49,8 @@ class TestQueryPlayByPlay:
 
     async def test_returns_play_by_play_data_with_team_action(
         self,
-        source_client_transport_factory,
-        get_source_data,
+        source_client_transport_factory: Callable[..., _SourceClientTransport],
+        get_source_data: Callable[..., dict[str, Any]],
     ) -> None:
         """
         For team behavior, the person would be the team
@@ -74,8 +77,8 @@ class TestQueryPlayByPlay:
 
     async def test_request_params_default_period_bounds(
         self,
-        source_client_transport_factory,
-        get_source_data,
+        source_client_transport_factory: Callable[..., _SourceClientTransport],
+        get_source_data: Callable[..., dict[str, Any]],
     ) -> None:
         transport = source_client_transport_factory(
             playbyplayv3=get_source_data("tests/data/play_by_play.json")
@@ -92,8 +95,8 @@ class TestQueryPlayByPlay:
 
     async def test_request_params_custom_period_bounds(
         self,
-        source_client_transport_factory,
-        get_source_data,
+        source_client_transport_factory: Callable[..., _SourceClientTransport],
+        get_source_data: Callable[..., dict[str, Any]],
     ) -> None:
         transport = source_client_transport_factory(
             playbyplayv3=get_source_data("tests/data/play_by_play.json")

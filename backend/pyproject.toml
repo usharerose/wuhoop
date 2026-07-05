@@ -27,16 +27,15 @@ known-first-party = ["wuhoop"]
 [tool.mypy]
 python_version = "3.14"
 strict = true
-exclude = ["tests/", "alembic/"]
+exclude = ["alembic/"]
 explicit_package_bases = true
-
-[[tool.mypy.overrides]]
-module = "tests.*"
-ignore_errors = true
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 testpaths = ["tests"]
+filterwarnings = [
+    "ignore::pytest.PytestCollectionWarning",
+]
 
 [dependency-groups]
 dev = [

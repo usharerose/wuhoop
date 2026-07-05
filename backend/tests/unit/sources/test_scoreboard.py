@@ -3,7 +3,9 @@ Unit tests for scoreboard components
 """
 
 import datetime
+from typing import Any, Callable
 
+from tests.unit.conftest import _SourceClientTransport
 from wuhoop.constants import LeagueId
 from wuhoop.sources import query_scoreboard
 from wuhoop.sources.base import SourceClient
@@ -16,8 +18,8 @@ class TestQueryScoreboard:
         self,
         game_date: datetime.date,
         nba_league_id: str,
-        source_client_transport_factory,
-        get_source_data,
+        source_client_transport_factory: Callable[..., _SourceClientTransport],
+        get_source_data: Callable[..., dict[str, Any]],
     ) -> None:
         transport = source_client_transport_factory(
             scoreboardv3=get_source_data("tests/data/scoreboard.json"),
@@ -86,8 +88,8 @@ class TestQueryScoreboard:
         self,
         game_date: datetime.date,
         nba_league_id: str,
-        source_client_transport_factory,
-        get_source_data,
+        source_client_transport_factory: Callable[..., _SourceClientTransport],
+        get_source_data: Callable[..., dict[str, Any]],
     ) -> None:
         transport = source_client_transport_factory(
             scoreboardv3=get_source_data("tests/data/scoreboard.json"),
@@ -105,8 +107,8 @@ class TestQueryScoreboard:
     async def test_request_params_with_default_league_id(
         self,
         game_date: datetime.date,
-        source_client_transport_factory,
-        get_source_data,
+        source_client_transport_factory: Callable[..., _SourceClientTransport],
+        get_source_data: Callable[..., dict[str, Any]],
     ) -> None:
         transport = source_client_transport_factory(
             scoreboardv3=get_source_data("tests/data/scoreboard.json"),
