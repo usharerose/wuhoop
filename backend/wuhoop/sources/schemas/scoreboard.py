@@ -1,17 +1,10 @@
 """
-Schema definitions
+Scoreboard definitions
 """
-
-from enum import StrEnum
-from typing import NamedTuple
 
 from pydantic import BaseModel
 
-
-class Meta(BaseModel):
-    version: int
-    request: str
-    time: str
+from .common import Meta
 
 
 class GameLeader(BaseModel):
@@ -128,14 +121,3 @@ class ScoreboardData(BaseModel):
 
     meta: Meta
     scoreboard: Scoreboard
-
-
-class LeagueId(StrEnum):
-    NBA = "00"
-
-
-class ScoreboardGameBrief(NamedTuple):
-    away_team_tricode: str
-    away_team_score: int
-    home_team_tricode: str
-    home_team_score: int
